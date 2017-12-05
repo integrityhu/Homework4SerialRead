@@ -61,11 +61,11 @@ public class FXMLController implements Initializable, jssc.SerialPortEventListen
             if (count > 0) {
                 try {
                     byte buffer[] = serialPort.readBytes(count);
-                    String input = new String(buffer); //"distance:207 cm" 
+                    String input = new String(buffer); //"distance:50 mm" 
                     String[] splitDistanceLine = input.split(":");
                     if (splitDistanceLine.length == 2) {
                         String[] distanceValue = splitDistanceLine[1].split(" ");
-                        if ((distanceValue.length == 2) && (Integer.valueOf(distanceValue[0])<5)) {
+                        if ((distanceValue.length == 2) && (Integer.valueOf(distanceValue[0])<=50)) { //less then or equal 5 cm
                             robot.keyPress(KeyEvent.VK_E);
                             Thread.sleep(200);
                             robot.keyRelease(KeyEvent.VK_E);
